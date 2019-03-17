@@ -1,6 +1,7 @@
 package it.brax.indovinanumero;
 
 import java.util.ArrayList;
+import it.brax.indovinanumero.model.IndovinaNumeroModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,8 +25,13 @@ public class SampleController {
 	double coefficienteDifficolta;
 	int min;
 	int max;
+	private IndovinaNumeroModel model;
 
-    @FXML
+    public void setModel(IndovinaNumeroModel model) {
+		this.model = model;
+	}
+
+	@FXML
     private Button btNuovaPartita;
 
     @FXML
