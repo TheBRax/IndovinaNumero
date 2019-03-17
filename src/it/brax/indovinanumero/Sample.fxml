@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane prefHeight="314.0" prefWidth="448.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="it.brax.indovinanumero.SampleController">
+   <top>
+      <Label text="Indovina Numero" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="hbImpostazioniPartita" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btNuovaPartita" mnemonicParsing="false" onAction="#btNuovaPartitaOnActionHandle" prefHeight="28.0" prefWidth="194.0" text="Nuova Partita" />
+                  <HBox prefHeight="54.0" prefWidth="315.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="59.0" text="NMAX">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="tfNMAX" prefHeight="28.0" prefWidth="47.0" text="100">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" selected="true" text="Facile">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="rdDifficoltagroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="139.0" selected="true" text="Intermedio" toggleGroup="$rdDifficoltagroup" />
+                              <RadioButton mnemonicParsing="false" text="Difficile" toggleGroup="$rdDifficoltagroup" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets left="25.0" />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox fx:id="hbPartita" disable="true" prefHeight="100.0">
+               <children>
+                  <TextField fx:id="tfInserimento" promptText="Inserisci un mumero...">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btProva" mnemonicParsing="false" onAction="#btProvaOnActionHAnlde" text="Prova" />
+                  <Button fx:id="btAbbandonaParita" mnemonicParsing="false" onAction="#btAbbandonaPartitaOnActionHandle" text="Abbandona partita">
+                     <HBox.margin>
+                        <Insets left="75.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="44.0" prefWidth="100.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label fx:id="lbMin" textFill="RED">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="&lt;= X &lt;=" />
+                  <Label fx:id="lbMax" textFill="#1cfa05">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <TextArea fx:id="taMessaggi" editable="false" prefHeight="121.0" prefWidth="428.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="31.0" prefWidth="363.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="lbTentativiFatti" text="-">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="/" />
+                  <Label fx:id="lbTentativiTotali" text="-">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <ProgressBar fx:id="pbTentativi" prefWidth="200.0" progress="0.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
