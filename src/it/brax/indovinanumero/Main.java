@@ -12,13 +12,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			IndovinaNumeroModel model = new IndovinaNumeroModel();
-			FXMLLoader loader = new FXMLLoader();
-			BorderPane root = (BorderPane)loader.load(getClass().getResource("Sample.fxml"));
-			SampleController controller = loader.getController();
-			controller.setModel(model);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Sample.fxml"));
+			BorderPane root = (BorderPane)loader.load();
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
+			IndovinaNumeroModel model = new IndovinaNumeroModel();
+			SampleController controller = (SampleController)loader.getController();
+			controller.setModel(model);
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
