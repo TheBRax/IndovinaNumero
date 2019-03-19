@@ -95,7 +95,7 @@ public class SampleController {
     		TMAX = (int)(Math.log10(NMAX)/Math.log10(2)) + 1;
     		TMAX = (int) (TMAX * coefficienteDifficolta);
     		
-    		lbMin.setText("0");
+    		lbMin.setText("1");
     		lbMax.setText(Integer.toString(NMAX));
     		lbTentativiFatti.setText("-");
     		lbTentativiTotali.setText("-");
