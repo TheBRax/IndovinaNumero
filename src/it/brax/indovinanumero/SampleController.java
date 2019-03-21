@@ -2,6 +2,8 @@ package it.brax.indovinanumero;
 
 import java.util.ArrayList;
 import it.brax.indovinanumero.model.IndovinaNumeroModel;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,12 +17,9 @@ import javafx.scene.layout.HBox;
 
 public class SampleController {
 	private int NMAX;
-	private int TMAX;
-	private int SEGRETO;
-	private int tentativo;
-	private int numTentativi;
-	private ArrayList<Integer> numInseriti = new ArrayList<Integer>();
-	private boolean numeroGiaInserito;
+
+	private String tentativo;
+
 	String difficolta;
 	double coefficienteDifficolta;
 	int min;
@@ -29,6 +28,14 @@ public class SampleController {
 
     public void setModel(IndovinaNumeroModel model) {
 		this.model = model;
+		lbTentativiTotali.textProperty().bind(Bindings.convert(model.tmaxProperty()));
+		lbTentativiFatti.textProperty().bind(Bindings.convert(model.numTentativiFattiProperty()));
+		lbMin.textProperty().bind(Bindings.convert(model.estremoInfProperty()));
+		lbMax.textProperty().bind(Bindings.convert(model.estremoSupProperty()));
+		taMessaggi.textProperty().bind(Bindings.convert(model.messaggiProperty()));
+		pbTentativi.progressProperty().bind( model.pbTentativiFattiValueProperty());
+		hbImpostazioniPartita.disableProperty().bind(model.inGiocoProperty());
+		hbPartita.disableProperty().bind(model.inGiocoProperty().not());
 	}
 
 	@FXML
@@ -78,95 +85,25 @@ public class SampleController {
     	try {
     		RadioButton rdDifficolta = (RadioButton) rdDifficoltagroup.getSelectedToggle();
     		difficolta = rdDifficolta.getText();
-    		switch (difficolta) {
-	    		case "Facile":
-	    			coefficienteDifficolta = 1.15;
-	    			break;
-	    		case "Intermedio":
-	    			coefficienteDifficolta = 1.0;
-	    			break;
-	    		case "Difficile":
-	    			coefficienteDifficolta = 0.85;
-	    			break;
-    		}
     		NMAX = Integer.parseInt(tfNMAX.getText());
-    		if (NMAX < 0) throw new Exception(); // viene gestita insieme alla NumberFormatException che può generare il metodo Integer.parseInt
-    		SEGRETO = (int)(Math.random() * NMAX) + 1;
-    		TMAX = (int)(Math.log10(NMAX)/Math.log10(2)) + 1;
-    		TMAX = (int) (TMAX * coefficienteDifficolta);
-    		
-    		lbMin.setText("1");
-    		lbMax.setText(Integer.toString(NMAX));
-    		lbTentativiFatti.setText("-");
-    		lbTentativiTotali.setText("-");
-    		pbTentativi.setProgress(0.0);
-    		hbPartita.setDisable(false);
-        	taMessaggi.clear();
-        	hbImpostazioniPartita.setDisable(true);
-        	lbTentativiFatti.setText("0");
-        	pbTentativi.setProgress(0);;
-        	lbTentativiTotali.setText(Integer.toString(TMAX));
-        	numTentativi = 0;
-        	numInseriti.clear();
-        	numeroGiaInserito = false;        	
+    		if (NMAX < 0) throw new Exception(); // viene gestita insieme alla NumberFormatException che pu� generare il metodo Integer.parseInt
+    		taMessaggi.clear();
+        	model.nuovaPartita(difficolta, NMAX);
     	} catch (Exception e) {
-    		taMessaggi.setText("NMAX DEVE ESSERE UN INTERO POSITIVO");;
+    		taMessaggi.setText("NMAX DEVE ESSERE UN INTERO POSITIVO");
     	}	
     }
 
     @FXML
     void btProvaOnActionHAnlde(ActionEvent event) {
-    	try {
-	    	tentativo = Integer.parseInt(tfInserimento.getText());
-	    	for (int j : numInseriti) {
-	    		if (j == tentativo) {
-	    			numeroGiaInserito = true;
-	    			taMessaggi.appendText("NUMERO GIÀ INSERITO\n");
-	    		}
-	    	}
-	    	if (numeroGiaInserito == false) {
-	    		numTentativi++;
-	    		numInseriti.add(tentativo);
-	    	   	lbTentativiFatti.setText(Integer.toString(numTentativi));
-		    	pbTentativi.setProgress((double)numTentativi/(double)TMAX);
-		    	if (tentativo == SEGRETO) {
-		    		taMessaggi.appendText("OTTIMO. Hai indovinato il numero segreto in " + numTentativi + " tentativi\nPARTITA CONCLUSA");
-		    		finePartita();
-		    	}
-		    	else {
-		    		if (numTentativi == TMAX) {
-		    			taMessaggi.appendText("Hai esautito i tentativi. Il numero segreto era " + SEGRETO +"\nPARTITA CONCLUSA");
-		    			finePartita();
-		    		}
-		    		else {
-		    			if (tentativo < SEGRETO) {
-		    				taMessaggi.appendText(tentativo + ": Troppo BASSO\n");
-		    				lbMin.setText(Integer.toString(tentativo + 1));
-		    			} else {
-		    				taMessaggi.appendText(tentativo + ": Troppo ALTO\n");
-		    				lbMax.setText(Integer.toString(tentativo -1));
-		    			}
-		    		}
-		    	}
-	    	}
-	    	numeroGiaInserito = false;
-    	} catch(NumberFormatException e) {
-    		taMessaggi.appendText("NUMERO NON VALIDO\n");
-    	}
+    	tentativo = tfInserimento.getText();
+    	model.verificaTentativo(tentativo);
     	tfInserimento.clear();
     }
     
     @FXML
     void btAbbandonaPartitaOnActionHandle(ActionEvent event) {
     	taMessaggi.appendText("PARTITA ABBANDONATA\n");
-    	finePartita();
+    	model.finePartita();
     }
-    
-    private void finePartita() {
-    	hbPartita.setDisable(true);
-    	hbImpostazioniPartita.setDisable(false);
-    	lbMin.setText("");
-    	lbMax.setText("");
-    }
-
 }
