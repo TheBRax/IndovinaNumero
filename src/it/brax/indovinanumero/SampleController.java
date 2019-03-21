@@ -86,11 +86,11 @@ public class SampleController {
     		RadioButton rdDifficolta = (RadioButton) rdDifficoltagroup.getSelectedToggle();
     		difficolta = rdDifficolta.getText();
     		NMAX = Integer.parseInt(tfNMAX.getText());
-    		if (NMAX < 0) throw new Exception(); // viene gestita insieme alla NumberFormatException che può generare il metodo Integer.parseInt
+    		if (NMAX < 0) throw new Exception(); // viene gestita insieme alla NumberFormatException che puï¿½ generare il metodo Integer.parseInt
     		taMessaggi.clear();
         	model.nuovaPartita(difficolta, NMAX);
     	} catch (Exception e) {
-    		taMessaggi.setText("NMAX DEVE ESSERE UN INTERO POSITIVO");
+    		model.stampaMessaggioErrore("NMAX DEVE ESSERE UN INTERO POSITIVO");
     	}	
     }
 

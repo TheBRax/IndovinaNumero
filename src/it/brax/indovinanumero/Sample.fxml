@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="314.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.brax.indovinanumero.SampleController">
+<BorderPane prefHeight="399.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.brax.indovinanumero.SampleController">
    <top>
       <Label text="Indovina Numero" BorderPane.alignment="CENTER">
          <font>
@@ -24,7 +24,7 @@
    <center>
       <VBox prefHeight="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="hbImpostazioniPartita" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hbImpostazioniPartita" prefHeight="64.0" prefWidth="428.0">
                <children>
                   <Button fx:id="btNuovaPartita" mnemonicParsing="false" onAction="#btNuovaPartitaOnActionHandle" prefHeight="28.0" prefWidth="194.0" text="Nuova Partita" />
                   <HBox prefHeight="54.0" prefWidth="315.0">
@@ -66,7 +66,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="hbPartita" disable="true" prefHeight="100.0">
+            <HBox fx:id="hbPartita" disable="true" prefHeight="40.0" prefWidth="428.0">
                <children>
                   <TextField fx:id="tfInserimento" promptText="Inserisci un mumero...">
                      <HBox.margin>
@@ -84,7 +84,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="44.0" prefWidth="100.0">
+            <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="428.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -102,7 +102,7 @@
                   </Label>
                </children>
             </HBox>
-            <TextArea fx:id="taMessaggi" editable="false" prefHeight="121.0" prefWidth="428.0" />
+            <TextArea fx:id="taMessaggi" editable="false" prefHeight="192.0" prefWidth="428.0" scrollTop="1000.0" />
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

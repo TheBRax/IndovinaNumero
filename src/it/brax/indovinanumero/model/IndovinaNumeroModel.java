@@ -63,7 +63,7 @@ public class IndovinaNumeroModel {
 			}
 			else {
 				if (tentativiFatti.contains(tentativo)) {
-					messaggi.set(messaggi.get() + "INTERO GIÀ INSERITO\n");
+					messaggi.set(messaggi.get() + "INTERO GIï¿½ INSERITO\n");
 				}
 				else {
 					tentativiFatti.add(tentativo);
@@ -76,10 +76,10 @@ public class IndovinaNumeroModel {
 							finePartita();
 						} else if (tentativo < segreto) {
 							messaggi.set(messaggi.get() + numTentativiFatti.get() + ". " + tentativo + ": Troppo Basso\n" );
-							estremoInf.set(tentativo >= estremoInf.get() ? tentativo : estremoInf.get() );
+							estremoInf.set(tentativo+1 >= estremoInf.get() ? tentativo+1 : estremoInf.get() );
 						} else if (tentativo > segreto) {
 							messaggi.set(messaggi.get() + numTentativiFatti.get() + ". " + tentativo + ": Troppo Alto\n" );
-							estremoSup.set(tentativo <= estremoSup.get() ? tentativo : estremoSup.get() );
+							estremoSup.set(tentativo-1 <= estremoSup.get() ? tentativo-1 : estremoSup.get() );
 						}
 					} else {			
 						messaggi.set(messaggi.get() + "Hai esaurito i tenativi. Il numero segreto era " + segreto);
@@ -97,6 +97,11 @@ public class IndovinaNumeroModel {
 		if (s.equals("Facile")) return 1.25;
 		else if (s.contentEquals("Intermedio")) return 1.00;
 		else return 0.85;
+	}
+	
+	public void stampaMessaggioErrore(String s) {
+		messaggi.set("");
+		messaggi.set(messaggi.get().concat(s));
 	}
 	
 	public void finePartita() {
