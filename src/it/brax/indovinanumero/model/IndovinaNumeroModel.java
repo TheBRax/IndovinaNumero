@@ -1,7 +1,9 @@
 package it.brax.indovinanumero.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -23,7 +25,7 @@ public class IndovinaNumeroModel {
 	
 	private BooleanProperty inGioco;
 	
-	private List<Integer> tentativiFatti;
+	private Set<Integer> tentativiFatti;
 	private IntegerProperty numTentativiFatti;
 	private IntegerProperty estremoInf;
 	private IntegerProperty estremoSup;
@@ -31,7 +33,7 @@ public class IndovinaNumeroModel {
 	public IndovinaNumeroModel() {
 		tmax = new SimpleIntegerProperty();
 		numTentativiFatti = new SimpleIntegerProperty();
-		tentativiFatti = new ArrayList<Integer>();
+		tentativiFatti = new HashSet<Integer>();
 		estremoInf = new SimpleIntegerProperty();
 		estremoSup = new SimpleIntegerProperty();
 		inGioco = new SimpleBooleanProperty();
